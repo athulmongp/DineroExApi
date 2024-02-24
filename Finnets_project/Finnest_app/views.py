@@ -203,8 +203,8 @@ class ModuleListPermissionDeleteView(generics.DestroyAPIView):
 
     
 
-
-# class ModuleListGetview(generics.ListAPIView):
+  
+# class ModuleListGetview(generics.ListAPIView):       
 #     queryset = ModuleList.objects.all() 
 #     serializer_class = ModuleListSerializer
 #     permission_classes = [permissions.IsAuthenticated]  
