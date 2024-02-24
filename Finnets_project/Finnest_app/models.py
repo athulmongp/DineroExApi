@@ -5,7 +5,7 @@ class Personn(models.Model):
     Name = models.CharField(max_length = 30)
 
 
-
+             
 
 class ModuleList(models.Model):
     name = models.CharField(max_length = 50,null = True,blank = True)

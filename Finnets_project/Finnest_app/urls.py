@@ -20,3 +20,4 @@ urlpatterns = [
     path('moduleListPermissionEdit/<int:pk>',views.ModuleListPermissionEditView.as_view()) ,
     path('moduleListPermissionDelete/<int:pk>',views.ModuleListPermissionDeleteView.as_view()) ,
 ]
+

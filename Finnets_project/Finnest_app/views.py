@@ -168,6 +168,9 @@ class ModuleListPermissionGetview(generics.ListAPIView):
                 queryset = queryset.filter(moduleid=moduleid)
             serializer = self.serializer_class(queryset, many=True)
             return Response(serializer.data)
+        
+
+        
 
 
 class ModuleListPermissionEditView(generics.UpdateAPIView):
