@@ -11,6 +11,7 @@ from rest_framework import status
 from django.contrib.auth.models import User
 from  datetime import date
 from django.http import HttpRequest, HttpResponse
+from rest_framework.exceptions import ValidationError
 
 
 def  Homepage(request):
@@ -71,13 +72,22 @@ class ModuleListGetview(generics.ListAPIView):
     serializer_class = ModuleListSerializer
     permission_classes = [permissions.IsAuthenticated]
    
-    
     def get(self, request, *args, **kwargs):
-        
+        modulename = self.request.query_params.get('name')
+        moduleid = self.request.query_params.get('id')
+
         if not request.user.is_authenticated:
             return Response({"detail": "Authentication credentials were not provided."}, status=status.HTTP_401_UNAUTHORIZED)
-        response = super().get(request, *args, **kwargs)
-        return response
+        else:
+            queryset = ModuleList.objects.all()
+            if modulename:
+                if len(modulename) < 3:
+                    raise ValidationError("Name must be at least 3 characters long.")
+                queryset = queryset.filter(name__icontains=modulename[:3])  
+            if moduleid:
+                queryset = queryset.filter(id=moduleid)
+            serializer = self.serializer_class(queryset, many=True)
+            return Response(serializer.data)
 
 
 class ModuleListEditView(generics.UpdateAPIView):
@@ -86,9 +96,11 @@ class ModuleListEditView(generics.UpdateAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def put(self, request, pk, format=None):
+        
         instance = self.get_object()
-        serializer = self.get_serializer(instance, data=request.data)
          
+        serializer = self.get_serializer(instance, data=request.data)
+          
         if  ModuleList.objects.filter(**request.data).exists():
             raise serializers.ValidationError('This is Already Exists')
         if serializer.is_valid():
@@ -97,8 +109,6 @@ class ModuleListEditView(generics.UpdateAPIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-
 
 
 
@@ -144,10 +154,20 @@ class ModuleListPermissionGetview(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
+        userid = self.request.query_params.get('userid')
+        moduleid = self.request.query_params.get('moduleid')
+    
+        
         if not request.user.is_authenticated:
             return Response({"detail": "Authentication credentials were not provided."}, status=status.HTTP_401_UNAUTHORIZED)
-        response = super().get(request, *args, **kwargs)
-        return response
+        else:
+            queryset = ModulePermission.objects.all()
+            if userid :
+                queryset = queryset.filter(userid=userid)  
+            if moduleid:
+                queryset = queryset.filter(moduleid=moduleid)
+            serializer = self.serializer_class(queryset, many=True)
+            return Response(serializer.data)
 
 
 class ModuleListPermissionEditView(generics.UpdateAPIView):

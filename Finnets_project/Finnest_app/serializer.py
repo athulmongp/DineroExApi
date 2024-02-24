@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class Person_Details(serializers.ModelSerializer):
     class Meta:
-        model  = User
+        model  = Personn
         fields = '__all__'
 
 class CustomLoginSerializer(serializers.Serializer):
@@ -41,7 +41,7 @@ class ModuleListSerializer(serializers.ModelSerializer):
 class ModulePermissionSerializer(serializers.ModelSerializer):
     class Meta:
         model = ModulePermission
-        fields = [ 'moduleid','userid','canAccess','canCreate','canEdit','canDelete']
+        fields = [ 'id','moduleid','userid','canAccess','canCreate','canEdit','canDelete']
         
         
         
