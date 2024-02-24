@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class Person_Details(serializers.ModelSerializer):
     class Meta:
-        model  = Personn       
+        model  = Personn         
         fields = '__all__'
 
 class CustomLoginSerializer(serializers.Serializer):

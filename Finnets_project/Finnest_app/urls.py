@@ -21,3 +21,4 @@ urlpatterns = [
     path('moduleListPermissionDelete/<int:pk>',views.ModuleListPermissionDeleteView.as_view()) ,
 ]
 
+  

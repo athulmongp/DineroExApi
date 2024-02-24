@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Personn(models.Model):
+class Personn(models.Model):  
     Name = models.CharField(max_length = 30)
 
 

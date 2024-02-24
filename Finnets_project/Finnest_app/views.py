@@ -170,7 +170,7 @@ class ModuleListPermissionGetview(generics.ListAPIView):
             return Response(serializer.data)
         
 
-        
+          
 
 
 class ModuleListPermissionEditView(generics.UpdateAPIView):
