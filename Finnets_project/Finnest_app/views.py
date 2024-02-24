@@ -153,7 +153,7 @@ class ModuleListPermissionGetview(generics.ListAPIView):
     serializer_class = ModulePermissionSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):   
         userid = self.request.query_params.get('userid')
         moduleid = self.request.query_params.get('moduleid')
     
