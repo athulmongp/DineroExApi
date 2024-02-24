@@ -155,7 +155,7 @@ class ModuleListPermissionGetview(generics.ListAPIView):
 
     def get(self, request, *args, **kwargs):   
         userid = self.request.query_params.get('userid')
-        moduleid = self.request.query_params.get('moduleid')
+        moduleid = self.request.query_params.get('moduleid')   
     
         
         if not request.user.is_authenticated:
